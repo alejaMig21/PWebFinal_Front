@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="CDR" showEffect="fade" modal="true"
+		widgetVar="manageCDRDialog" responsive="true">
+		<p:outputPanel id="manage-cdr-content" class="ui-fluid">
+			<p:outputPanel rendered="#{not empty manageCDRBean.selectedCDR}">
+				<p:panelGrid layout="grid" columns="2">
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel for="@next">Nombre:</p:outputLabel>
+							<p:inputText id="name" class="test" required="true" 
+								value="#{manageCDRBean.selectedCDR.namCDR}" />
+							<p:message for="@previous" ></p:message>
+						</div>			
+					</h:panelGroup>
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel
+							  for="@next"
+							  value= "Seleccione el Presidente"
+							/>
+							<p:selectOneMenu
+							  id="voter"
+							  value="#{manageCDRBean.selectedCDR.id_presidentCDR}"
+							  required="true"
+							  style="min-width: 15rem"
+							  multiple="true"
+							  filter="true"
+							  filterMatchMode="startsWith"
+							  panelStyle="width: 30rem"
+							  scrollHeight="250"
+							>
+							  <f:selectItems
+								value="#{manageVoterBean.voters}"
+								var="voter"
+								itemLabel="#{voter.name}"
+								itemValue="#{voter.id_voter}"
+							  />
+							</p:selectOneMenu>
+							<p:message for="@previous" />
+						  </div>
+						<div class="p-field">
+							<p:outputLabel
+							  for="@next"
+							  value= "Seleccione el Colegio"
+							/>
+							<p:selectOneMenu
+							  id="college"
+							  value="#{manageCDRBean.selectedCDR.id_college}"
+							  required="true"
+							  style="min-width: 15rem"
+							  multiple="true"
+							  filter="true"
+							  filterMatchMode="startsWith"
+							  panelStyle="width: 30rem"
+							  scrollHeight="250"
+							>
+							  <f:selectItems
+								value="#{manageCollegeBean.colleges}"
+								var="college"
+								itemLabel="#{college.nameCollege}"
+								itemValue="#{college.idCollege}"
+							  />
+							</p:selectOneMenu>
+							<p:message for="@previous" />
+						  </div>
+						</h:panelGroup>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<f:facet name="footer">
+			<p:commandButton value="Salvar" icon="pi pi-check"
+				actionListener="#{manageCDRBean.saveCDR}"
+				update="manage-cdr-content" process="manage-cdr-content @this" />
+			<p:commandButton value="Cancelar" icon="pi pi-times"
+				onclick="PF('manageCDRDialog').hide()" class="ui-button-secondary" />
+		</f:facet>
+	</p:dialog>
+</ui:composition>

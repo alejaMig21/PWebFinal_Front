@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/pages/template/layout.xhtml">
+        <ui:define name="title">
+		    Agregar Nominados:
+		</ui:define>
+		<ui:define name="layout">
+		<h:form id="form">
+			<div class="card crud-demo">
+				<p:toolbar>
+					<p:toolbarGroup>
+						<p:commandButton value="Nuevo" icon="pi pi-plus"
+							actionListener="#{manageNominatedBean.openNew}"
+							update=":form:manage-nominated-content"
+							oncomplete="PF('manageNominatedDialog').show()"
+							styleClass="ui-button-success" style="margin-right: .5rem">
+							<p:resetInput target=":form:manage-nominated-content" />
+						</p:commandButton>
+					</p:toolbarGroup>
+					<p:toolbarGroup align="right">
+						<p:commandButton value="Export" icon="pi pi-upload"
+							styleClass="ui-button-help" ajax="false">
+							<p:dataExporter type="pdf" target="dt-nominateds" fileName="nominateds" />
+						</p:commandButton>
+					</p:toolbarGroup>
+				</p:toolbar>
+                
+				<p:dataTable id="dt-nominateds" widgetVar="dtNominateds" var="nominated"
+					value="#{manageNominatedBean.nominateds}" reflow="true" paginator="true"
+					rows="10" paginatorPosition="bottom">
+					<f:facet name="header">
+						<div class="products-table-header">
+							<span style="font-weight: bold">Nominados</span> <span
+								class="filter-container ui-input-icon-left"> <i
+								class="pi pi-search"></i> <p:inputText id="globalFilter"
+									onkeyup="PF('dtNominateds').filter()" placeholder="Buscar" />
+							</span>
+
+						</div>
+					</f:facet>
+					
+
+<!--					<p:column headerText="Nombre" sortBy="#{nominated.id_voter}" filterBy="#{nominated.id_voter}">-->
+<!--						<h:outputText value="#{manageNominatedBean.voterService.getVoterById(nominated.id_voter).name}" />-->
+<!--					</p:column>-->
+<!--					<p:column headerText="ID" sortBy="#{nominated.id}">-->
+<!--						<h:outputText value="#{nominated.id}" />-->
+<!--					</p:column>-->
+					<p:column headerText="Telefono" sortBy="#{nominated.phone}">
+						<h:outputText value="#{nominated.phone}" />
+					</p:column>
+					<p:column headerText="Ocupacion" sortBy="#{nominated.ocupation}"
+						filterBy="#{nominated.ocupation}">
+						<h:outputText value="#{nominated.ocupation}" />
+					</p:column>
+					<p:column headerText="Profesion" sortBy="#{nominated.profetion}"
+						filterBy="#{nominated.profetion}">
+						<h:outputText value="#{nominated.profetion}" />
+					</p:column>
+					<p:column headerText="Votos" sortBy="#{nominated.cant_vote}"
+						filterBy="#{nominated.cant_vote}">
+						<h:outputText value="#{nominated.cant_vote}" />
+					</p:column>
+					
+					<p:column exportable="false">
+						<p:commandButton icon="pi pi-pencil" action="#{manageNominatedBean.openForEdit}"
+							update=":form:manage-nominated-content"
+							oncomplete="PF('manageNominatedDialog').show()"
+							styleClass="edit-button rounded-button ui-button-success"
+							process="@this">
+							<f:setPropertyActionListener value="#{nominated}"
+								target="#{manageNominatedBean.selectedNominated}" />
+							<p:resetInput target=":form:manage-nominated-content" />
+						</p:commandButton>
+						<p:commandButton class="ui-button-warning rounded-button"
+							icon="pi pi-trash" process="@this" 
+							action="#{manageNominatedBean.deleteNominated}" >
+							<f:setPropertyActionListener value="#{nominated}"
+								target="#{manageNominatedBean.selectedNominated}" />
+							<p:confirm header="Confirmar" message="Está seguro de eliminar al nominado?" icon="pi pi-exclamation-triangle"/>
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+				<ui:include src="/pages/menu/nominated-form.xhtml"></ui:include>
+
+				<p:confirmDialog global="true" showEffect="fade" width="300">
+					<p:commandButton value="Si" type="button"
+						styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+					<p:commandButton value="No" type="button"
+						styleClass="ui-confirmdialog-no ui-button-secondary"
+						icon="pi pi-times" />
+				</p:confirmDialog>
+			</div>
+		</h:form>
+    	</ui:define>
+    </ui:composition>
+</html>

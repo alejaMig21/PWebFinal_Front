@@ -1,0 +1,98 @@
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:p="http://primefaces.org/ui"
+>
+  <ui:composition template="/pages/template/layout.xhtml">
+    <ui:define name="title"> Votar: </ui:define>
+    <ui:define name="layout">
+      <h:form class="form-votar-nominado">
+        <p:outputPanel id="manage-voter-content" class="ui-fluid">
+          <p:outputPanel>
+            <p:panelGrid layout="grid" columns="2">
+              <h:panelGroup>
+                <h:form>
+                    <div class="p-field">
+                        <p:outputLabel for="@next" value="CDR" />
+                        <p:selectOneMenu
+                          id="cdr"
+                          value="#{manageVoterBean.selectedCDRName}"
+                          required="true"
+                          style="min-width: 15rem"
+                          multiple="true"
+                          filter="true"
+                          filterMatchMode="startsWith"
+                          panelStyle="width: 30rem"
+                          scrollHeight="250"
+                        >
+                          <f:selectItems
+                            value="#{manageCDRBean.cdrs}"
+                            var="cdr"
+                            itemLabel="#{cdr.namCDR}"
+                            itemValue="#{cdr.namCDR}"
+                          />
+                        </p:selectOneMenu>
+                        <p:message for="@previous" />
+                      </div>
+                  <div>
+                    <p:selectBooleanCheckbox
+                      value="#{manageVoterBean.selectedVoter.vote}"
+                      onchange="PF('buiCause').hide()"
+                      itemLabel="Si"
+                    />
+                    <p:selectBooleanCheckbox
+                      value="#{manageVoterBean.selectedVoter.vote}"
+                      onchange="PF('buiNominados').hide()"
+                      itemLabel="No"
+                    />
+                  </div>
+                  <div class="jejeje">
+                    <p:outputLabel for="@next" value="Nominados" />
+                    <p:selectOneListbox
+                      id="lista_nominados"
+                      value="#{selectOneView.option}"
+					  required="true"
+                    >
+                      <f:selectItems
+                        value="#{manageNominatedBean.nominateds}"
+                        itemLabel="#{nominated.namVot}"
+                      />
+                    </p:selectOneListbox>
+                  </div>
+                  <div class="jajaja">
+                    <p:outputLabel for="@next" value="Causa" />
+                    <p:inputTextarea
+                      id="area_causa"
+                      value="#{manageNominatedBean.selectedNominated.cause}"
+                      rows="6"
+                      cols="33"
+                    />
+                  </div>
+
+                  <p:blockUI block="jejeje" widgetVar="buiCause" />
+                  <p:blockUI block="jajaja" widgetVar="buiNominados" />
+
+                  <p:commandButton
+                    value="Salvar"
+                    icon="pi pi-check"
+                    actionListener="#{manageVoterBean.saveVoter}"
+                    update="manage-voter-content"
+                    process="manage-voter-content @this"
+                  />
+                  <p:commandButton
+                    value="Cancelar"
+                    icon="pi pi-times"
+                    onclick="PF('manageVoterDialog').hide()"
+                    class="ui-button-secondary"
+                  />
+                </h:form>
+              </h:panelGroup>
+            </p:panelGrid>
+          </p:outputPanel>
+        </p:outputPanel>
+      </h:form>
+    </ui:define>
+  </ui:composition>
+</html>

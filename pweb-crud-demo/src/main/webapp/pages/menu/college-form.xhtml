@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="College" showEffect="fade" modal="true"
+		widgetVar="manageCollegeDialog" responsive="true">
+		<p:outputPanel id="manage-college-content" class="ui-fluid">
+			<p:outputPanel rendered="#{not empty manageCollegeBean.selectedCollege}">
+				<p:panelGrid layout="grid" columns="2">
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel for="@next">Nombre:</p:outputLabel>
+							<p:inputText id="name" class="test" required="true" 
+								value="#{manageCollegeBean.selectedCollege.nameCollege}" />
+							<p:message for="@previous" ></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next">Direccion:</p:outputLabel>
+							<p:inputText id="address" class="test" required="true" 
+								value="#{manageCollegeBean.selectedCollege.address}" />
+							<p:message for="@previous" ></p:message>
+						</div>		
+					</h:panelGroup>
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel
+							  for="@next"
+							  value= "Seleccione el Distrito"
+							/>
+							<p:selectOneMenu
+							  id="district"
+							  value="#{manageCollegeBean.selectedCollege.district}"
+							  required="true"
+							  style="min-width: 15rem"
+							  multiple="true"
+							  filter="true"
+							  filterMatchMode="startsWith"
+							  panelStyle="width: 30rem"
+							  scrollHeight="250"
+							>
+							  <f:selectItems
+								value="#{manageDistrictBean.districts}"
+								var="district"
+								itemLabel="#{district.namDis}"
+								itemValue="#{district.codDis}"
+							  />
+							</p:selectOneMenu>
+							<p:message for="@previous" />
+						  </div>
+						</h:panelGroup>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<f:facet name="footer">
+			<p:commandButton value="Salvar" icon="pi pi-check"
+				actionListener="#{manageCollegeBean.saveCollege}"
+				update="manage-college-content" process="manage-college-content @this" />
+			<p:commandButton value="Cancelar" icon="pi pi-times"
+				onclick="PF('manageCollegeDialog').hide()" class="ui-button-secondary" />
+		</f:facet>
+	</p:dialog>
+</ui:composition>

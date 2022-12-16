@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Municipality" showEffect="fade" modal="true"
+		widgetVar="manageMunicipalityDialog" responsive="true">
+		<p:outputPanel id="manage-municipality-content" class="ui-fluid">
+			<p:outputPanel rendered="#{not empty manageMunicipalityBean.selectedMunicipality}">
+				<p:panelGrid layout="grid" columns="2">
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel for="@next">Nombre:</p:outputLabel>
+							<p:inputText id="name" class="test" required="true" 
+								value="#{manageMunicipalityBean.selectedMunicipality.nameMunicipality}" />
+							<p:message for="@previous" ></p:message>
+						</div>			
+					</h:panelGroup>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<f:facet name="footer">
+			<p:commandButton value="Salvar" icon="pi pi-check"
+				actionListener="#{manageMunicipalityBean.saveMunicipality}"
+				update="manage-municipality-content" process="manage-municipality-content @this" />
+			<p:commandButton value="Cancelar" icon="pi pi-times"
+				onclick="PF('manageMunicipalityDialog').hide()" class="ui-button-secondary" />
+		</f:facet>
+	</p:dialog>
+</ui:composition>

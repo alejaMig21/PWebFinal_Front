@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Votante" showEffect="fade" modal="true"
+		widgetVar="manageVoterDialog" responsive="true">
+		<p:outputPanel id="manage-voter-content" class="ui-fluid">
+			<p:outputPanel rendered="#{not empty manageVoterBean.selectedVoter}">
+				<p:panelGrid layout="grid" columns="2">
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel for="@next">Nombre:</p:outputLabel>
+							<p:inputText id="name" class="test" required="true" 
+								value="#{manageVoterBean.selectedVoter.name}" />
+							<p:message for="@previous" ></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel>Fecha de Nacimiento:</p:outputLabel>
+							<p:datePicker class="test" id="fecha_nac" value="#{manageVoterBean.selectedDate}" showIcon="true" />
+						</div>
+						<div class="p-field">
+							<p:outputLabel>Direccion:</p:outputLabel>
+							<p:inputText class="test" id="direccion" value="#{manageVoterBean.selectedVoter.adr_voter}" showIcon="true" />
+						</div>
+					</h:panelGroup>
+					<h:panelGroup>
+						<div class="p-field">
+                        <p:outputLabel for="@next" value="CDR" />
+                        <p:selectOneMenu
+                          id="cdr"
+                          value="#{manageVoterBean.selectedCDRName}"
+                          required="true"
+                          style="min-width: 15rem"
+                          multiple="true"
+                          filter="true"
+                          filterMatchMode="startsWith"
+                          panelStyle="width: 30rem"
+                          scrollHeight="250"
+                        >
+                          <f:selectItems
+                            value="#{manageCDRBean.cdrs}"
+                            var="cdr"
+                            itemLabel="#{cdr.namCDR}"
+                            itemValue="#{cdr.namCDR}"
+                          />
+                        </p:selectOneMenu>
+                        <p:message for="@previous" />
+                      </div>
+					</h:panelGroup>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<f:facet name="footer">
+			<p:commandButton value="Salvar" icon="pi pi-check"
+				actionListener="#{manageVoterBean.saveVoter}"
+				update="manage-voter-content" process="manage-voter-content @this" />
+			<p:commandButton value="Cancelar" icon="pi pi-times"
+				onclick="PF('manageVoterDialog').hide()" class="ui-button-secondary" />
+		</f:facet>
+	</p:dialog>
+</ui:composition>
