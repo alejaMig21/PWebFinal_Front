@@ -4,12 +4,37 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:dialog header="Delegated" showEffect="fade" modal="true"
-		widgetVar="manageDelegatedDialog" responsive="true">
-		<p:outputPanel id="manage-delegated-content" class="ui-fluid">
-			<p:outputPanel rendered="#{not empty manageDelegatedBean.selectedDelegated}">
+	<p:dialog header="ElectoralProcess" showEffect="fade" modal="true"
+		widgetVar="manageElectoralProcessDialog" responsive="true">
+		<p:outputPanel id="manage-electoral-process-content" class="ui-fluid">
+			<p:outputPanel rendered="#{not empty manageElectoralProcessBean.selectedElectoralProcess}">
 				<p:panelGrid layout="grid" columns="2">
 					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel
+									for="@next"
+									value= "Seleccione el Municipio"
+							/>
+							<p:selectOneMenu
+									id="municipality"
+									value="#{manageElectoralProcessBean.selectedElectoralProcess.municipality}"
+									required="true"
+									style="min-width: 15rem"
+									multiple="true"
+									filter="true"
+									filterMatchMode="startsWith"
+									panelStyle="width: 30rem"
+									scrollHeight="250"
+							>
+								<f:selectItems
+										value="#{manageMunicipalityBean.municipalitys}"
+										var="municipality"
+										itemLabel="#{manageMunicipalityBean.service.getMunicipalityById(municipality.codMun).nameMunicipality}"
+										itemValue="#{municipality.codMun}"
+								/>
+							</p:selectOneMenu>
+							<p:message for="@previous" />
+						</div>
 						<div class="p-field">
 							<p:outputLabel
 							  for="@next"
@@ -43,7 +68,7 @@
 		<f:facet name="footer">
 			<p:commandButton value="Salvar" icon="pi pi-check"
 				actionListener="#{manageDelegatedBean.saveDelegated}"
-				update="manage-delegated-content" process="manage-delegated-content @this" />
+				update="manage-electoral-process-content" process="manage-electoral-process-content @this" />
 			<p:commandButton value="Cancelar" icon="pi pi-times"
 				onclick="PF('manageDelegatedDialog').hide()" class="ui-button-secondary" />
 		</f:facet>

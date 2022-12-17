@@ -30,7 +30,7 @@
       <div class="menu-category"></div>
       <div class="menu-items">
         <p:outputPanel>
-          <h:link outcome="/pages/menu/lista_nominados.xhtml">
+          <h:link outcome="/pages/menu/lista_electoral_process.xhtml">
             Proceso Electoral
           </h:link>
         </p:outputPanel>
@@ -68,6 +68,14 @@
           <h:link outcome="/pages/menu/lista_municipality.xhtml">
             Municipios
           </h:link>
+        </p:outputPanel>
+        <p:outputPanel>
+          <p:commandLink action="#{languageBean.setLanguage('es')}" ajax="false">
+            <span>Español</span>
+          </p:commandLink>
+          <p:commandLink action="#{languageBean.setLanguage('en')}" ajax="false">
+            <span>Inglés</span>
+          </p:commandLink>
         </p:outputPanel>
       </div>
     </div>
