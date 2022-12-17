@@ -116,6 +116,7 @@ public class VoterServiceImpl implements VoterService{
         restService.DELETE(uri, params, String.class, null).getBody();
 	}
 
+    @Override
     public String getVoterNameById(int id){
         for(VoterDto voter : getVoters()){
             if(voter.getId_voter() == id) return voter.getName();

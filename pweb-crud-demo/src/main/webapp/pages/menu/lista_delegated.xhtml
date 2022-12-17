@@ -6,7 +6,7 @@
 
     <ui:composition template="/pages/template/layout.xhtml">
         <ui:define name="title">
-		    Agregar Colegio Electoral:
+		    Agregar Delegado:
 		</ui:define>
 		<ui:define name="layout">
 		<h:form id="form">
@@ -14,68 +14,64 @@
 				<p:toolbar>
 					<p:toolbarGroup>
 						<p:commandButton value="Nuevo" icon="pi pi-plus"
-							actionListener="#{manageCollegeBean.openNew}"
-							update=":form:manage-college-content"
-							oncomplete="PF('manageCollegeDialog').show()"
+							actionListener="#{manageDelegatedBean.openNew}"
+							update=":form:manage-delegated-content"
+							oncomplete="PF('manageDelegatedDialog').show()"
 							styleClass="ui-button-success" style="margin-right: .5rem">
-							<p:resetInput target=":form:manage-college-content" />
+							<p:resetInput target=":form:manage-delegated-content" />
 						</p:commandButton>
 					</p:toolbarGroup>
 					<p:toolbarGroup align="right">
 						<p:commandButton value="Export" icon="pi pi-upload"
 							styleClass="ui-button-help" ajax="false">
-							<p:dataExporter type="pdf" target="dt-colleges" fileName="colleges" />
+							<p:dataExporter type="pdf" target="dt-delegated" fileName="delegated" />
 						</p:commandButton>
 					</p:toolbarGroup>
 				</p:toolbar>
                 
-				<p:dataTable id="dt-colleges" widgetVar="dtColleges" var="college"
-					value="#{manageCollegeBean.colleges}" reflow="true" paginator="true"
+				<p:dataTable id="dt-delegateds" widgetVar="dtDelegateds" var="delegated"
+					value="#{manageDelegatedBean.delegateds}" reflow="true" paginator="true"
 					rows="10" paginatorPosition="bottom">
 					<f:facet name="header">
 						<div class="products-table-header">
-							<span style="font-weight: bold">Colegios</span> <span
+							<span style="font-weight: bold">Delegados</span> <span
 								class="filter-container ui-input-icon-left"> <i
 								class="pi pi-search"></i> <p:inputText id="globalFilter"
-									onkeyup="PF('dtColleges').filter()" placeholder="Buscar" />
+									onkeyup="PF('dtDelegateds').filter()" placeholder="Buscar" />
 							</span>
 
 						</div>
 					</f:facet>
 					
 
-					<p:column headerText="Nombre" sortBy="#{college.nameCollege}" filterBy="#{college.nameCollege}">
-						<h:outputText value="#{college.nameCollege}" />
-					</p:column>
-					<p:column headerText="Direccion" sortBy="#{college.address}" filterBy="#{college.address}">
-						<h:outputText value="#{college.address}" />
-					</p:column>
-					<p:column headerText="Circunscripcion" sortBy="#{college.district}" filterBy="#{college.district}">
-						<h:outputText value="#{manageCollegeBean.districtService.getDistrictById(college.district).namDis}" />
+					<p:column headerText="Nombre" sortBy="#{delegated.id}" filterBy="#{delegated.id}">
+						<h:outputText value="#{manageDelegatedBean.voterService.
+												getVoterNameById(manageDelegatedBean.nominatedService.
+												getVoterByNominated(delegated.id_nominated))}" />
 					</p:column>
 					
 					<p:column exportable="false">
-						<p:commandButton icon="pi pi-pencil" action="#{manageCollegeBean.openForEdit}"
-							update=":form:manage-college-content"
-							oncomplete="PF('manageCollegeDialog').show()"
+						<p:commandButton icon="pi pi-pencil" action="#{manageDelegatedBean.openForEdit}"
+							update=":form:manage-delegated-content"
+							oncomplete="PF('manageDelegatedDialog').show()"
 							styleClass="edit-button rounded-button ui-button-success"
 							process="@this">
-							<f:setPropertyActionListener value="#{college}"
-								target="#{manageCollegeBean.selectedCollege}" />
-							<p:resetInput target=":form:manage-college-content" />
+							<f:setPropertyActionListener value="#{delegated}"
+								target="#{manageDelegatedBean.selectedDelegated}" />
+							<p:resetInput target=":form:manage-delegated-content" />
 						</p:commandButton>
 						<p:commandButton class="ui-button-warning rounded-button"
 							icon="pi pi-trash" process="@this" 
-							action="#{manageCollegeBean.deleteCollege}" >
-							<f:setPropertyActionListener value="#{college}"
-								target="#{manageCollegeBean.selectedCollege}" />
-							<p:confirm header="#{msgs.message_confirm}" message="#{msgs.message_deleted_college}" icon="pi pi-exclamation-triangle"/>
+							action="#{manageDelegatedBean.deleteDelegated}" >
+							<f:setPropertyActionListener value="#{delegated}"
+								target="#{manageDelegatedBean.selectedDelegated}" />
+							<p:confirm header="#{msgs.message_confirm}" message="#{msgs.message_deleted_delegated}" icon="pi pi-exclamation-triangle"/>
 						</p:commandButton>
 					</p:column>
 
 				</p:dataTable>
 
-				<ui:include src="college-form.xhtml"></ui:include>
+				<ui:include src="delegated-form.xhtml"></ui:include>
 
 				<p:confirmDialog global="true" showEffect="fade" width="300">
 					<p:commandButton value="Si" type="button"

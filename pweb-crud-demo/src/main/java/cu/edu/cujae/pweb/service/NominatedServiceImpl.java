@@ -100,5 +100,13 @@ public class NominatedServiceImpl implements NominatedService{
         String uri = template.expand(idNominated).toString();
         restService.DELETE(uri, params, String.class, null).getBody();
 	}
+
+    @Override
+    public int getVoterByNominated(int id_nominated){
+        for(NominatedDto nominated : getNominateds()){
+            if(nominated.getId() == id_nominated) return nominated.getId_voter();
+        }
+        return 0;
+    }
 	
 }

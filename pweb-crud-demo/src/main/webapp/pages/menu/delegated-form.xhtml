@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Delegated" showEffect="fade" modal="true"
+		widgetVar="manageDelegatedDialog" responsive="true">
+		<p:outputPanel id="manage-delegated-content" class="ui-fluid">
+			<p:outputPanel rendered="#{not empty manageDelegatedBean.selectedDelegated}">
+				<p:panelGrid layout="grid" columns="2">
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel
+							  for="@next"
+							  value= "Seleccione el Nominado"
+							/>
+							<p:selectOneMenu
+							  id="district"
+							  value="#{manageDelegatedBean.selectedDelegated.id_nominated}"
+							  required="true"
+							  style="min-width: 15rem"
+							  multiple="true"
+							  filter="true"
+							  filterMatchMode="startsWith"
+							  panelStyle="width: 30rem"
+							  scrollHeight="250"
+							>
+							  <f:selectItems
+								value="#{manageNominatedBean.nominateds}"
+								var="nominated"
+								itemLabel="#{manageNominatedBean.voterService.getVoterNameById(nominated.id_voter)}"
+								itemValue="#{nominated.id}"
+							  />
+							</p:selectOneMenu>
+							<p:message for="@previous" />
+						  </div>
+						</h:panelGroup>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<f:facet name="footer">
+			<p:commandButton value="Salvar" icon="pi pi-check"
+				actionListener="#{manageDelegatedBean.saveDelegated}"
+				update="manage-delegated-content" process="manage-delegated-content @this" />
+			<p:commandButton value="Cancelar" icon="pi pi-times"
+				onclick="PF('manageDelegatedDialog').hide()" class="ui-button-secondary" />
+		</f:facet>
+	</p:dialog>
+</ui:composition>
