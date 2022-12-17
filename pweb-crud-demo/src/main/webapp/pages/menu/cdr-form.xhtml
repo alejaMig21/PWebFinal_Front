@@ -13,7 +13,7 @@
 						<div class="p-field">
 							<p:outputLabel for="@next">Nombre:</p:outputLabel>
 							<p:inputText id="name" class="test" required="true" 
-								value="#{manageCDRBean.selectedCDR.namCDR}" />
+								value="#{manageCDRBean.selectedCDR.name_cdr}" />
 							<p:message for="@previous" ></p:message>
 						</div>			
 					</h:panelGroup>
@@ -25,7 +25,7 @@
 							/>
 							<p:selectOneMenu
 							  id="voter"
-							  value="#{manageCDRBean.selectedCDR.id_presidentCDR}"
+							  value="#{manageCDRBean.selectedCDR.id_president}"
 							  required="true"
 							  style="min-width: 15rem"
 							  multiple="true"
@@ -50,7 +50,7 @@
 							/>
 							<p:selectOneMenu
 							  id="college"
-							  value="#{manageCDRBean.selectedCDR.id_college}"
+							  value="#{manageCDRBean.selectedCDR.college}"
 							  required="true"
 							  style="min-width: 15rem"
 							  multiple="true"

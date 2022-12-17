@@ -12,4 +12,5 @@ public interface VoterService {
 	void createVoter(VoterDto voter);
 	void updateVoter(VoterDto voter);
 	void deleteVoter(int id);
+	String getVoterNameById(int id);
 }

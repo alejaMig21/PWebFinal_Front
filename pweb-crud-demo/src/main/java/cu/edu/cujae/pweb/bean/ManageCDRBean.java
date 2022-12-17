@@ -1,16 +1,12 @@
 package cu.edu.cujae.pweb.bean;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
-import javax.faces.context.FacesContext;
 
+import cu.edu.cujae.pweb.dto.VoterDto;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -92,7 +88,9 @@ public class ManageCDRBean {
 //        selectedCDR.setId_college(collegeService.getIdByName(selectedCollegeName));
 //        selectedCDR.setId_presidentCDR(voterService.getIdByName(selectedVoterName));
 
-        if (this.selectedCDR.getCodCDR() == 0) {
+        if (this.selectedCDR.getId_cdr() == 0) {
+            System.out.println("Efectivamente esta creando el CDR " + selectedCDR.getName_cdr() +
+                    " cuyo presidente es " + selectedCDR.getId_president());
             cdrService.createCDR(selectedCDR);
 
             JsfUtils.addInfoMessageFromBundle("message_inserted_cdr");
@@ -106,19 +104,28 @@ public class ManageCDRBean {
 
         PrimeFaces.current().executeScript("PF('manageCDRDialog').hide()");
         PrimeFaces.current().ajax().update("form:dt-cdrs");
+    }
 
+    public boolean votersInCdr(int cdr){
+        for(VoterDto voter : voterService.getVoters()){
+            if(voter.getCdr() == cdr) return true;
+        }
+        return false;
     }
 
     public void deleteCDR() {
+        if(!votersInCdr(selectedCDR.getId_cdr())) { // Si ningun votante pertenece a dicho CDR
+            cdrService.deleteCDR(selectedCDR.getId_cdr());
+            this.selectedCDR = null;
 
-        cdrService.deleteCDR(selectedCDR.getCodCDR());
-        this.selectedCDR = null;
+            cdrs = cdrService.getCDRs();
 
-        cdrs = cdrService.getCDRs();
-
-        JsfUtils.addInfoMessageFromBundle("message_deleted_cdr");
+            JsfUtils.addInfoMessageFromBundle("message_deleted_cdr");
+            PrimeFaces.current().ajax().update("form:messages", "form:dt-cdrs");
+            return;
+        }
+        JsfUtils.addInfoMessageFromBundle("message_not_deleted_cdr");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-cdrs");
-
     }
 
     public List<CDRDto> getCdrs() {

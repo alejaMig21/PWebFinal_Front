@@ -61,7 +61,7 @@
 					</p:column> -->
 					<p:column headerText="CDR" sortBy="#{voter.cdr}"
 						filterBy="#{voter.cdr}">
-						<h:outputText value="#{manageVoterBean.selectedCDRName}" />
+						<h:outputText value="#{manageVoterBean.cdrService.getCDRById(voter.cdr).name_cdr}" />
 					</p:column>
 					<p:column exportable="false">
 						<p:commandButton icon="pi pi-pencil" action="#{manageVoterBean.openForEdit}"

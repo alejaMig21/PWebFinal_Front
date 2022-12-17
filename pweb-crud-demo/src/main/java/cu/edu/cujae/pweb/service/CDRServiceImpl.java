@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -86,13 +87,15 @@ public class CDRServiceImpl implements CDRService{
     }
 
 	@Override
-	public void createCDR(CDRDto cdr) {
+	public void createCDR(@NotNull CDRDto cdr) {
+        System.out.println("Llego al Service implementation el CDR " + cdr.getName_cdr() +
+                " cuyo presidente es " + cdr.getId_president());
 		// TODO Auto-generated method stub
 		restService.POST("/api/v1/cdrs/" + "", cdr, String.class).getBody();
 	}
 
 	@Override
-	public void updateCDR(CDRDto cdr) {
+	public void updateCDR(@NotNull CDRDto cdr) {
 		// TODO Auto-generated method stub
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         restService.PUT("/api/v1/cdrs/" + "", params, cdr, String.class).getBody();

@@ -115,5 +115,12 @@ public class VoterServiceImpl implements VoterService{
         String uri = template.expand(idVoter).toString();
         restService.DELETE(uri, params, String.class, null).getBody();
 	}
+
+    public String getVoterNameById(int id){
+        for(VoterDto voter : getVoters()){
+            if(voter.getId_voter() == id) return voter.getName();
+        }
+        return "None";
+    }
 	
 }

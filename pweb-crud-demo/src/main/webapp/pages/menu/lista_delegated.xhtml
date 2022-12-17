@@ -6,7 +6,7 @@
 
     <ui:composition template="/pages/template/layout.xhtml">
         <ui:define name="title">
-		    Agregar CDR:
+		    Agregar Colegio Electoral:
 		</ui:define>
 		<ui:define name="layout">
 		<h:form id="form">
@@ -14,69 +14,68 @@
 				<p:toolbar>
 					<p:toolbarGroup>
 						<p:commandButton value="Nuevo" icon="pi pi-plus"
-							actionListener="#{manageCDRBean.openNew}"
-							update=":form:manage-cdr-content"
-							oncomplete="PF('manageCDRDialog').show()"
+							actionListener="#{manageCollegeBean.openNew}"
+							update=":form:manage-college-content"
+							oncomplete="PF('manageCollegeDialog').show()"
 							styleClass="ui-button-success" style="margin-right: .5rem">
-							<p:resetInput target=":form:manage-cdr-content" />
+							<p:resetInput target=":form:manage-college-content" />
 						</p:commandButton>
 					</p:toolbarGroup>
 					<p:toolbarGroup align="right">
 						<p:commandButton value="Export" icon="pi pi-upload"
 							styleClass="ui-button-help" ajax="false">
-							<p:dataExporter type="pdf" target="dt-cdrs" fileName="cdrs" />
+							<p:dataExporter type="pdf" target="dt-colleges" fileName="colleges" />
 						</p:commandButton>
 					</p:toolbarGroup>
 				</p:toolbar>
                 
-				<p:dataTable id="dt-cdrs" widgetVar="dtCDRs" var="cdr"
-					value="#{manageCDRBean.cdrs}" reflow="true" paginator="true"
+				<p:dataTable id="dt-colleges" widgetVar="dtColleges" var="college"
+					value="#{manageCollegeBean.colleges}" reflow="true" paginator="true"
 					rows="10" paginatorPosition="bottom">
 					<f:facet name="header">
 						<div class="products-table-header">
-							<span style="font-weight: bold">CDRs</span> <span
+							<span style="font-weight: bold">Colegios</span> <span
 								class="filter-container ui-input-icon-left"> <i
 								class="pi pi-search"></i> <p:inputText id="globalFilter"
-									onkeyup="PF('dtCDRs').filter()" placeholder="Buscar" />
+									onkeyup="PF('dtColleges').filter()" placeholder="Buscar" />
 							</span>
 
 						</div>
 					</f:facet>
 					
 
-					<p:column headerText="Nombre" sortBy="#{cdr.name_cdr}" filterBy="#{cdr.name_cdr}">
-						<h:outputText value="#{cdr.name_cdr}" />
+					<p:column headerText="Nombre" sortBy="#{college.nameCollege}" filterBy="#{college.nameCollege}">
+						<h:outputText value="#{college.nameCollege}" />
 					</p:column>
-					<p:column headerText="Colegio" sortBy="#{cdr.college}" filterBy="#{cdr.college}">
-						<h:outputText value="#{manageCDRBean.collegeService.getCollegeById(cdr.college).nameCollege}" />
+					<p:column headerText="Direccion" sortBy="#{college.address}" filterBy="#{college.address}">
+						<h:outputText value="#{college.address}" />
 					</p:column>
-					<p:column headerText="Presidente" sortBy="#{cdr.id_president}" filterBy="#{cdr.id_president}">
-						<h:outputText value="#{manageCDRBean.voterService.getVoterNameById(cdr.id_president)}" />
+					<p:column headerText="Circunscripcion" sortBy="#{college.district}" filterBy="#{college.district}">
+						<h:outputText value="#{manageCollegeBean.districtService.getDistrictById(college.district).namDis}" />
 					</p:column>
 					
 					<p:column exportable="false">
-						<p:commandButton icon="pi pi-pencil" action="#{manageCDRBean.openForEdit}"
-							update=":form:manage-cdr-content"
-							oncomplete="PF('manageCDRDialog').show()"
+						<p:commandButton icon="pi pi-pencil" action="#{manageCollegeBean.openForEdit}"
+							update=":form:manage-college-content"
+							oncomplete="PF('manageCollegeDialog').show()"
 							styleClass="edit-button rounded-button ui-button-success"
 							process="@this">
-							<f:setPropertyActionListener value="#{cdr}"
-								target="#{manageCDRBean.selectedCDR}" />
-							<p:resetInput target=":form:manage-cdr-content" />
+							<f:setPropertyActionListener value="#{college}"
+								target="#{manageCollegeBean.selectedCollege}" />
+							<p:resetInput target=":form:manage-college-content" />
 						</p:commandButton>
 						<p:commandButton class="ui-button-warning rounded-button"
 							icon="pi pi-trash" process="@this" 
-							action="#{manageCDRBean.deleteCDR}" >
-							<f:setPropertyActionListener value="#{cdr}"
-								target="#{manageCDRBean.selectedCDR}" />
-							<p:confirm header="#{msgs.message_confirm}" message="#{msgs.message_deleted_cdr}" icon="pi pi-exclamation-triangle"/>
+							action="#{manageCollegeBean.deleteCollege}" >
+							<f:setPropertyActionListener value="#{college}"
+								target="#{manageCollegeBean.selectedCollege}" />
+							<p:confirm header="#{msgs.message_confirm}" message="#{msgs.message_deleted_college}" icon="pi pi-exclamation-triangle"/>
 						</p:commandButton>
 					</p:column>
 
 				</p:dataTable>
 
-				<ui:include src="cdr-form.xhtml"></ui:include>
-				<!-- <ui:include src="/pages/menu/cdr-form.xhtml"></ui:include> -->
+				<ui:include src="college-form.xhtml"></ui:include>
 
 				<p:confirmDialog global="true" showEffect="fade" width="300">
 					<p:commandButton value="Si" type="button"
