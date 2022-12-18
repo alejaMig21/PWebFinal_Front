@@ -7,8 +7,8 @@ import cu.edu.cujae.pweb.dto.UserDto;
 
 public interface UserService {
 	List<UserDto> getUsers();
-	UserDto getUserById(String userId);
+	UserDto getUserById(int userId);
 	void createUser(UserDto user);
 	void updateUser(UserDto user);
-	void deleteUser(String id);
+	void deleteUser(int id);
 }

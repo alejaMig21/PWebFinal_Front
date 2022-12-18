@@ -13,22 +13,13 @@
 						<div class="p-field">
 							<p:outputLabel for="@next">Nombre Completo</p:outputLabel>
 							<p:inputText id="name" required="true" 
-								value="#{manageUserBean.selectedUser.fullName}" />
+								value="#{manageUserBean.selectedUser.full_name}" />
 							<p:message for="@previous" ></p:message>
 						</div>
 						<div class="p-field">
 							<p:outputLabel for="@next">Usuario</p:outputLabel>
 							<p:inputText id="username" required="true"
-								value="#{manageUserBean.selectedUser.username}" />
-							<p:message for="@previous"></p:message>
-						</div>
-						<div class="p-field">
-							<p:outputLabel for="@next">Identificación</p:outputLabel>
-							<p:inputText id="ci" required="true"
-								value="#{manageUserBean.selectedUser.identification}"
-								maxlength="11">
-								<p:keyFilter mask="num" />
-							</p:inputText>
+								value="#{manageUserBean.selectedUser.user_name}" />
 							<p:message for="@previous"></p:message>
 						</div>
 						<div class="p-field">
@@ -43,33 +34,47 @@
 						</div>
 					</h:panelGroup>
 					<h:panelGroup>
-					    <div class="p-field">
-							<p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Roles</p:outputLabel>
-							<p:selectCheckboxMenu id="multiple" required="true"
-								value="#{manageUserBean.selectedRoles}" label="Seleccione"
-								style="min-width: 15rem" multiple="true" filter="true"
-								filterMatchMode="startsWith" panelStyle="width: 30rem"
-								scrollHeight="250" rendered="#{empty manageUserBean.selectedUser.id}">
-								<f:selectItems value="#{manageUserBean.roles}" var="role"
-									itemLabel="#{role.description}" itemValue="#{role.id}" />
-							</p:selectCheckboxMenu>
+						<div class="p-field">
+							<p:outputLabel
+									for="@next"
+									value= "Seleccione el Rol"
+							/>
+							<p:selectOneMenu
+									id="roles"
+									value="#{manageUserBean.selectedUser.roles}"
+									required="false"
+									style="min-width: 15rem"
+									multiple="true"
+									filter="true"
+									filterMatchMode="startsWith"
+									panelStyle="width: 30rem"
+									scrollHeight="250"
+							>
+								<f:selectItems
+										value="#{manageRolesBean.roles}"
+										var="roles"
+										itemLabel="#{roles.role_name}"
+										itemValue="#{roles.id}"
+								/>
+							</p:selectOneMenu>
+							<p:message for="@previous" />
 						</div>
 						<div class="p-field">
-							<p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Contraseña</p:outputLabel>
+							<p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.user_password}">Contraseña</p:outputLabel>
 							<p:password id="password1" required="true"
-								rendered="#{empty manageUserBean.selectedUser.id}"
-								value="#{manageUserBean.selectedUser.password}"
+								rendered="#{empty manageUserBean.selectedUser.user_password}"
+								value="#{manageUserBean.selectedUser.user_password}"
 								match="password2">
 							</p:password>
-							<p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
+							<p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.user_password}"></p:message>
 						</div>
 						<div class="p-field">
-							<p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.id}">Repetir contraseña</p:outputLabel>
+							<p:outputLabel for="@next" rendered="#{empty manageUserBean.selectedUser.user_password}">Repetir contraseña</p:outputLabel>
 							<p:password id="password2" required="true"
-								value="#{manageUserBean.selectedUser.password}"
-								rendered="#{empty manageUserBean.selectedUser.id}">
+								value="#{manageUserBean.selectedUser.user_password}"
+								rendered="#{empty manageUserBean.selectedUser.user_password}">
 							</p:password>
-							<p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.id}"></p:message>
+							<p:message for="@previous" rendered="#{empty manageUserBean.selectedUser.user_password}"></p:message>
 						</div>
 						
 					</h:panelGroup>

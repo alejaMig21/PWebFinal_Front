@@ -9,11 +9,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpServletRequest;
 
+import cu.edu.cujae.pweb.dto.RolesDto;
+import cu.edu.cujae.pweb.service.RolesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import cu.edu.cujae.pweb.dto.RoleDto;
-import cu.edu.cujae.pweb.service.RoleService;
 
 @Component
 @ManagedBean
@@ -23,10 +22,10 @@ public class UserBean {
 	private String username;
 	private String password;
 	
-	private List<RoleDto> roles;
+	private List<RolesDto> roles;
 	
 	@Autowired
-	private RoleService roleService;
+	private RolesService roleService;
 	
 	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
 	@PostConstruct

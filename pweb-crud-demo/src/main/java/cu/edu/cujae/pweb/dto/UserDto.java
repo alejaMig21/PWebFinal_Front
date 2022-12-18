@@ -1,55 +1,50 @@
 package cu.edu.cujae.pweb.dto;
 
-import java.util.List;
-
 public class UserDto {
-	private String id;
-	private String username;
-	private String fullName;
-	private String password;
+	private int id_user;
+	private String user_name;
+	private String full_name;
+	private String user_password;
 	private String email;
-	private String identification;
-	private List<RoleDto> roles;
+	private int roles;
 	
 	public UserDto() {
 		super();
 	}
 
-	public UserDto(String id, String username, String fullName, String password, String email, String identification,
-			List<RoleDto> roles) {
+	public UserDto(int id_user, String user_name, String full_name, String user_password, String email, int roles) {
 		super();
-		this.id = id;
-		this.username = username;
-		this.fullName = fullName;
-		this.password = password;
+		this.id_user = id_user;
+		this.user_name = user_name;
+		this.full_name = full_name;
+		this.user_password = user_password;
 		this.email = email;
-		this.identification = identification;
 		this.roles = roles;
 	}
 	
-	public String getId() {
-		return id;
+	public int getId_user() {
+		return id_user;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setId_user(int id_user) {
+		this.id_user = id_user;
 	}
-	public String getUsername() {
-		return username;
+	public String getUser_name() {
+		return user_name;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
-	public String getFullName() {
-		return fullName;
+	public String getFull_name() {
+		return full_name;
 	}
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setFull_name(String full_name) {
+		this.full_name = full_name;
 	}
-	public String getPassword() {
-		return password;
+	public String getUser_password() {
+		return user_password;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUser_password(String user_password) {
+		this.user_password = user_password;
 	}
 	public String getEmail() {
 		return email;
@@ -57,16 +52,10 @@ public class UserDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getIdentification() {
-		return identification;
-	}
-	public void setIdentification(String identification) {
-		this.identification = identification;
-	}
-	public List<RoleDto> getRoles() {
+	public int getRoles() {
 		return roles;
 	}
-	public void setRoles(List<RoleDto> roles) {
+	public void setRoles(int roles) {
 		this.roles = roles;
 	}
 }

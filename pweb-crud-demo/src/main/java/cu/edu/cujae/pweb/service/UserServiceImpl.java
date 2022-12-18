@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService{
 	    try {
 	    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		    ApiRestMapper<UserDto> apiRestMapper = new ApiRestMapper<>();
-		    String response = (String)restService.GET("/api/v1/users", params, String.class).getBody();
+		    String response = (String)restService.GET("/api/v1/users/", params, String.class).getBody();
 		    userList = apiRestMapper.mapList(response, UserDto.class);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public UserDto getUserById(String userId) {
+	public UserDto getUserById(int userId) {
 		UserDto user = null;
 
 		try {
@@ -54,17 +54,17 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void createUser(UserDto user) {
-		restService.POST("/api/v1/users", user, String.class).getBody();
+		restService.POST("/api/v1/users/", user, String.class).getBody();
 	}
 
 	@Override
 	public void updateUser(UserDto user) {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		restService.PUT("/api/v1/users", params, user, String.class).getBody();
+		restService.PUT("/api/v1/users/", params, user, String.class).getBody();
 	}
 
 	@Override
-	public void deleteUser(String userId) {
+	public void deleteUser(int userId) {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		UriTemplate template = new UriTemplate("/api/v1/users/{userId}");
 	    String uri = template.expand(userId).toString();
