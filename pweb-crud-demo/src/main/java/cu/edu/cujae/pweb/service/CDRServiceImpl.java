@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cu.edu.cujae.pweb.dto.VoterDto;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -109,5 +110,18 @@ public class CDRServiceImpl implements CDRService{
         String uri = template.expand(idCDR).toString();
         restService.DELETE(uri, params, String.class, null).getBody();
 	}
+
+    @Autowired
+    private VoterService voterService;
+    @Override
+    public List<VoterDto> votersByCdr(int id_cdr){
+        List<VoterDto> list = new ArrayList<>();
+        for(VoterDto voter : voterService.getVoters()){
+            if(voter.getCdr() == id_cdr){
+                list.add(voter);
+            }
+        }
+        return list;
+    }
 	
 }

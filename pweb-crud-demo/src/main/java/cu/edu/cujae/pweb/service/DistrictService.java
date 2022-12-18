@@ -7,9 +7,11 @@ import cu.edu.cujae.pweb.dto.DistrictDto;
 
 public interface DistrictService {
 	List<DistrictDto> getDistricts();
-	DistrictDto getDistrictById(int districtId); // originalmente el parametro era String
+	DistrictDto getDistrictById(int districtId);
 	int getIdByName(String districtName);
 	void createDistrict(DistrictDto user);
 	void updateDistrict(DistrictDto user);
-	void deleteDistrict(int id); // originalmente el parametro era String
+	void deleteDistrict(int id);
+	int getMunicipalityByDistrict(int id_district);
+	String getDistrictNameById(int id);
 }

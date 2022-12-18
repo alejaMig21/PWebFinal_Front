@@ -11,5 +11,5 @@ public interface NominatedService {
 	void insert(NominatedDto nominated);
 	void update(NominatedDto nominated);
 	void delete(int idNominated);
-	int getVoterByNominated(int id_nominated);
+	int getVoterIdByNominated(int id_nominated);
 }

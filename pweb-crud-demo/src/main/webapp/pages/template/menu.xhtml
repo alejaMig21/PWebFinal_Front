@@ -35,18 +35,8 @@
           </h:link>
         </p:outputPanel>
         <p:outputPanel>
-          <h:link outcome="/pages/menu/lista_delegated.xhtml">
-            Delegados
-          </h:link>
-        </p:outputPanel>
-        <p:outputPanel>
-          <h:link outcome="/pages/menu/lista_nominados.xhtml">
-            Nominados
-          </h:link>
-        </p:outputPanel>
-        <p:outputPanel>
-          <h:link outcome="/pages/menu/lista_votantes.xhtml">
-            Votantes
+          <h:link outcome="/pages/menu/lista_municipality.xhtml">
+            Municipios
           </h:link>
         </p:outputPanel>
         <p:outputPanel>
@@ -65,17 +55,19 @@
           </h:link>
         </p:outputPanel>
         <p:outputPanel>
-          <h:link outcome="/pages/menu/lista_municipality.xhtml">
-            Municipios
+          <h:link outcome="/pages/menu/lista_votantes.xhtml">
+            Votantes
           </h:link>
         </p:outputPanel>
         <p:outputPanel>
-          <p:commandLink action="#{languageBean.setLanguage('es')}" ajax="false">
-            <span>Español</span>
-          </p:commandLink>
-          <p:commandLink action="#{languageBean.setLanguage('en')}" ajax="false">
-            <span>Inglés</span>
-          </p:commandLink>
+          <h:link outcome="/pages/menu/lista_nominados.xhtml">
+            Nominados
+          </h:link>
+        </p:outputPanel>
+        <p:outputPanel>
+          <h:link outcome="/pages/menu/lista_delegated.xhtml">
+            Delegados
+          </h:link>
         </p:outputPanel>
       </div>
     </div>

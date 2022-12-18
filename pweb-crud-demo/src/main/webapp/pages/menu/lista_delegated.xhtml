@@ -47,7 +47,7 @@
 					<p:column headerText="Nombre" sortBy="#{delegated.id}" filterBy="#{delegated.id}">
 						<h:outputText value="#{manageDelegatedBean.voterService.
 												getVoterNameById(manageDelegatedBean.nominatedService.
-												getVoterByNominated(delegated.id_nominated))}" />
+												getVoterIdByNominated(delegated.id_nominated))}" />
 					</p:column>
 					
 					<p:column exportable="false">

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import cu.edu.cujae.pweb.dto.DistrictDto;
+import cu.edu.cujae.pweb.dto.MunicipalityDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -100,5 +102,21 @@ public class CollegeServiceImpl implements CollegeService{
         String uri = template.expand(id_college).toString();
         restService.DELETE(uri, params, String.class, null).getBody();
 	}
+
+    @Override
+    public int getDistrictByCollege(int id_college){
+        for(CollegeDto college : getColleges()){
+            if(college.getIdCollege() == id_college) return college.getDistrict();
+        }
+        return 0;
+    }
+
+    @Override
+    public String getCollegeNameById(int id){
+        for(CollegeDto college : getColleges()){
+            if(college.getIdCollege() == id) return college.getNameCollege();
+        }
+        return "None";
+    }
 	
 }

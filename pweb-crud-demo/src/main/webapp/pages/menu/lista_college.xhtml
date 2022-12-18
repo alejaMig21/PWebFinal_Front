@@ -51,7 +51,7 @@
 						<h:outputText value="#{college.address}" />
 					</p:column>
 					<p:column headerText="Circunscripcion" sortBy="#{college.district}" filterBy="#{college.district}">
-						<h:outputText value="#{manageCollegeBean.districtService.getDistrictById(college.district).namDis}" />
+						<h:outputText value="#{manageCollegeBean.districtService.getDistrictNameById(college.district)}" />
 					</p:column>
 					
 					<p:column exportable="false">

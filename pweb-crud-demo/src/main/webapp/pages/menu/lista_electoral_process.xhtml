@@ -47,14 +47,15 @@
 					<p:column headerText="ID" sortBy="#{electoralprocess.id_electoral_process}" filterBy="#{electoralprocess.id_electoral_process}">
 						<h:outputText value="#{electoralprocess.id_electoral_process}" />
 					</p:column>
-					<p:column headerText="Nominado" sortBy="#{electoralprocess.id_nominated}" filterBy="#{electoralprocess.id_nominated}">
-						<h:outputText value="#{electoralprocess.id_nominated}" />
+					<p:column headerText="Municipio" sortBy="#{electoralprocess.municipality}" filterBy="#{electoralprocess.municipality}">
+						<h:outputText value="#{manageElectoralProcessBean.municipalityService.
+												getMunicipalityNameById(electoralprocess.municipality)}" />
 					</p:column>
-					<p:column headerText="No.Vuelta" sortBy="#{electoralprocess.roundnum}" filterBy="#{electoralprocess.roundnum}">
-						<h:outputText value="#{electoralprocess.roundnum}" />
+					<p:column headerText="No.Nominados" sortBy="#{electoralprocess.id_electoral_process}" filterBy="#{electoralprocess.id_electoral_process}">
+						<h:outputText value="#{manageElectoralProcessBean.municipalityService.totalNominateds(electoralprocess.municipality)}" />
 					</p:column>
-					<p:column headerText="No.Vuelta" sortBy="#{electoralprocess.municipality}" filterBy="#{electoralprocess.municipality}">
-						<h:outputText value="#{electoralprocess.municipality}" />
+					<p:column headerText="No.Vuelta" sortBy="#{electoralprocess.id_electoral_process}" filterBy="#{electoralprocess.id_electoral_process}">
+						<h:outputText value="#{manageElectoralProcessBean.municipalityService.secondRound(electoralprocess.municipality)}" />
 					</p:column>
 					
 					<p:column exportable="false">

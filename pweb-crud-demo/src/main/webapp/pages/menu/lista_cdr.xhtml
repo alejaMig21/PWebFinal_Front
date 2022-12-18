@@ -48,7 +48,7 @@
 						<h:outputText value="#{cdr.name_cdr}" />
 					</p:column>
 					<p:column headerText="Colegio" sortBy="#{cdr.college}" filterBy="#{cdr.college}">
-						<h:outputText value="#{manageCDRBean.collegeService.getCollegeById(cdr.college).nameCollege}" />
+						<h:outputText value="#{manageCDRBean.collegeService.getCollegeNameById(cdr.college)}" />
 					</p:column>
 					<p:column headerText="Presidente" sortBy="#{cdr.id_president}" filterBy="#{cdr.id_president}">
 						<h:outputText value="#{manageCDRBean.voterService.getVoterNameById(cdr.id_president)}" />

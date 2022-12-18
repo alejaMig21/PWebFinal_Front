@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cu.edu.cujae.pweb.dto.VoterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -102,11 +103,19 @@ public class NominatedServiceImpl implements NominatedService{
 	}
 
     @Override
-    public int getVoterByNominated(int id_nominated){
+    public int getVoterIdByNominated(int id_nominated){
         for(NominatedDto nominated : getNominateds()){
             if(nominated.getId() == id_nominated) return nominated.getId_voter();
         }
         return 0;
     }
+
+//    @Override
+//    public String getNominatedNameById(int id){
+//        for(NominatedDto nominated : getNominateds()){
+//            if(nominated.getId() == id) return nominated.getName();
+//        }
+//        return "None";
+//    }
 	
 }

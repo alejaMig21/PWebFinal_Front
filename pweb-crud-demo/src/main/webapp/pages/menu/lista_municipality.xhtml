@@ -47,8 +47,9 @@
 					<p:column headerText="Nombre" sortBy="#{municipality.nameMunicipality}" filterBy="#{municipality.nameMunicipality}">
 						<h:outputText value="#{municipality.nameMunicipality}" />
 					</p:column>
-					
-					<!-- Hay que hacer la lista de Colegio Electoral -->
+					<p:column headerText="Proceso Electoral" sortBy="#{municipality.id_electoral_process}" filterBy="#{municipality.id_electoral_process}">
+						<h:outputText value="#{municipality.id_electoral_process}" />
+					</p:column>
 					
 					<p:column exportable="false">
 						<p:commandButton icon="pi pi-pencil" action="#{manageMunicipalityBean.openForEdit}"

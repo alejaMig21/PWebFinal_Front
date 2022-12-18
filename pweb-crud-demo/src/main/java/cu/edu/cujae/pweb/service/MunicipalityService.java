@@ -16,5 +16,8 @@ public interface MunicipalityService {
 
 	void updateMunicipality(MunicipalityDto municipality);
 
-	void deleteMunicipality(int id); // originalmente el parametro era String
+	void deleteMunicipality(int id);
+	String getMunicipalityNameById(int id);
+	int totalNominateds(int id_municipality);
+	String secondRound(int id_municipality);
 }

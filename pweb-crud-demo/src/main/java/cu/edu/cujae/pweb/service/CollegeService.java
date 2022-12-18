@@ -11,4 +11,6 @@ public interface CollegeService {
 	void createCollege(CollegeDto cdr);
 	void updateCollege(CollegeDto cdr);
 	void deleteCollege(int id_college); // Originalmente era String
+	int getDistrictByCollege(int id_college);
+	String getCollegeNameById(int id);
 }

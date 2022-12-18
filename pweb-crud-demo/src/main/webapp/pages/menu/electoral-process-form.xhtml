@@ -35,31 +35,6 @@
 							</p:selectOneMenu>
 							<p:message for="@previous" />
 						</div>
-						<div class="p-field">
-							<p:outputLabel
-							  for="@next"
-							  value= "Seleccione el Nominado"
-							/>
-							<p:selectOneMenu
-							  id="nominated"
-							  value="#{manageDelegatedBean.selectedDelegated.id_nominated}"
-							  required="true"
-							  style="min-width: 15rem"
-							  multiple="true"
-							  filter="true"
-							  filterMatchMode="startsWith"
-							  panelStyle="width: 30rem"
-							  scrollHeight="250"
-							>
-							  <f:selectItems
-								value="#{manageNominatedBean.nominateds}"
-								var="nominated"
-								itemLabel="#{manageNominatedBean.voterService.getVoterNameById(nominated.id_voter)}"
-								itemValue="#{nominated.id}"
-							  />
-							</p:selectOneMenu>
-							<p:message for="@previous" />
-						  </div>
 						</h:panelGroup>
 				</p:panelGrid>
 			</p:outputPanel>

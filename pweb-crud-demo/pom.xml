@@ -74,7 +74,7 @@
 	</dependency>
  	
  	<!-- Pretty faces -->
-	<!-- <dependency>
+	<dependency>
 	    <groupId>org.ocpsoft.rewrite</groupId>
 	    <artifactId>rewrite-servlet</artifactId>
 	    <version>3.4.4.Final</version>
@@ -83,7 +83,7 @@
 	    <groupId>org.ocpsoft.rewrite</groupId>
 	    <artifactId>rewrite-config-prettyfaces</artifactId>
 	    <version>3.4.4.Final</version>
-	</dependency> -->
+	</dependency>
 	
 	<!--  Spring Security -->
 	<!-- <dependency>

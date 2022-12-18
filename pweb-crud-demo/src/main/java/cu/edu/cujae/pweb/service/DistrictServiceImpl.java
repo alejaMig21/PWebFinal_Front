@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cu.edu.cujae.pweb.dto.MunicipalityDto;
+import cu.edu.cujae.pweb.dto.NominatedDto;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -85,7 +88,7 @@ public class DistrictServiceImpl implements DistrictService{
 	}
 
 	@Override
-	public void updateDistrict(DistrictDto district) {
+	public void updateDistrict(@NotNull DistrictDto district) {
         System.out.println("El municipio de la circunscripcion es " + district.getIdMunicipality());
 		// TODO Auto-generated method stub
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
@@ -93,12 +96,29 @@ public class DistrictServiceImpl implements DistrictService{
 	}
 
 	@Override
-	public void deleteDistrict(int idDistrict) { // Originalmente era String
+	public void deleteDistrict(int idDistrict) {
+        System.out.println("El Distrito/Circunscripcion que llego fue " + idDistrict);
 		// TODO Auto-generated method stub
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/districts/" + "{idDistrict}");
         String uri = template.expand(idDistrict).toString();
         restService.DELETE(uri, params, String.class, null).getBody();
 	}
+
+    @Override
+    public int getMunicipalityByDistrict(int id_district){
+        for(DistrictDto district : getDistricts()){
+            if(district.getCodDis() == id_district) return district.getIdMunicipality();
+        }
+        return 0;
+    }
+
+    @Override
+    public String getDistrictNameById(int id){
+        for(DistrictDto district : getDistricts()){
+            if(district.getCodDis() == id) return district.getNamDis();
+        }
+        return "None";
+    }
 	
 }

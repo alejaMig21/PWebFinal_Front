@@ -2,6 +2,8 @@ package cu.edu.cujae.pweb.bean;
 
 import cu.edu.cujae.pweb.dto.ElectoralProcessDto;
 import cu.edu.cujae.pweb.service.ElectoralProcessService;
+import cu.edu.cujae.pweb.service.MunicipalityService;
+import cu.edu.cujae.pweb.service.NominatedService;
 import cu.edu.cujae.pweb.service.VoterService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
@@ -49,6 +51,26 @@ public class ManageElectoralProcessBean {
     private ElectoralProcessService service;
     @Autowired
     private VoterService voterService;
+    @Autowired
+    private NominatedService nominatedService;
+    @Autowired
+    private MunicipalityService municipalityService;
+
+    public NominatedService getNominatedService() {
+        return nominatedService;
+    }
+
+    public void setNominatedService(NominatedService nominatedService) {
+        this.nominatedService = nominatedService;
+    }
+
+    public MunicipalityService getMunicipalityService() {
+        return municipalityService;
+    }
+
+    public void setMunicipalityService(MunicipalityService municipalityService) {
+        this.municipalityService = municipalityService;
+    }
 
     public VoterService getVoterService() {
         return voterService;

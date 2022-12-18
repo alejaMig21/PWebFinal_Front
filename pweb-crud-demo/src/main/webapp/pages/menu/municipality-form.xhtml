@@ -17,6 +17,33 @@
 							<p:message for="@previous" ></p:message>
 						</div>			
 					</h:panelGroup>
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel
+									for="@next"
+									value= "Seleccione el Proceso Electoral"
+							/>
+							<p:selectOneMenu
+									id="voter"
+									value="#{manageMunicipalityBean.selectedMunicipality.id_electoral_process}"
+									required="true"
+									style="min-width: 15rem"
+									multiple="true"
+									filter="true"
+									filterMatchMode="startsWith"
+									panelStyle="width: 30rem"
+									scrollHeight="250"
+							>
+								<f:selectItems
+										value="#{manageElectoralProcessBean.eprocesss}"
+										var="eprocess"
+										itemLabel="#{eprocess.id_electoral_process}"
+										itemValue="#{eprocess.id_electoral_process}"
+								/>
+							</p:selectOneMenu>
+							<p:message for="@previous" />
+						</div>
+					</h:panelGroup>
 				</p:panelGrid>
 			</p:outputPanel>
 		</p:outputPanel>
